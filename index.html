@@ -1,435 +1,471 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#176b45">
-
-<title>Skolyoz Egzersizleri</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --green: #176b45;
-    --dark-green: #0e5134;
-    --light-green: #eaf7ef;
-    --soft-green: #d5f0df;
-    --white: #ffffff;
-    --text: #24332b;
-    --gray: #718078;
-    --red: #d9534f;
-    --shadow: 0 10px 30px rgba(23, 107, 69, 0.12);
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #eefaf3, #dff2e7);
-    color: var(--text);
-    min-height: 100vh;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
-    border: none;
-}
-
-.screen {
-    display: none;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.screen.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-}
-
-/* -------------------------
-   KARŞILAMA
-------------------------- */
-
-.welcome-card {
-    background: white;
-    border-radius: 28px;
-    padding: 45px 25px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.logo {
-    width: 85px;
-    height: 85px;
-    background: var(--light-green);
-    border-radius: 50%;
-    margin: 0 auto 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 42px;
-}
-
-.welcome-card h1 {
-    color: var(--green);
-    font-size: 34px;
-    margin-bottom: 12px;
-}
-
-.welcome-card h2 {
-    font-size: 23px;
-    margin-bottom: 12px;
-}
-
-.welcome-card p {
-    color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.primary-button {
-    width: 100%;
-    padding: 17px;
-    background: var(--green);
-    color: white;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.primary-button:hover {
-    background: var(--dark-green);
-    transform: translateY(-2px);
-}
-
-/* -------------------------
-   BİLGİ
-------------------------- */
-
-.info-card {
-    background: white;
-    border-radius: 25px;
-    padding: 30px 25px;
-    box-shadow: var(--shadow);
-}
-
-.info-card h2 {
-    color: var(--green);
-    margin-bottom: 20px;
-}
-
-.info-list {
-    list-style: none;
-    margin-bottom: 25px;
-}
-
-.info-list li {
-    background: var(--light-green);
-    margin-bottom: 10px;
-    padding: 14px;
-    border-radius: 12px;
-    line-height: 1.5;
-}
-
-.warning {
-    background: #fff8e5;
-    border-left: 5px solid #e5ad27;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    line-height: 1.5;
-    font-size: 14px;
-}
-
-/* -------------------------
-   EGZERSİZ
-------------------------- */
-
-.exercise-screen {
-    align-items: flex-start !important;
-    padding-top: 15px;
-}
-
-.exercise-container {
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
-}
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.brand {
-    color: var(--green);
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.today {
-    color: var(--gray);
-    font-size: 13px;
-}
-
-.progress-box {
-    background: white;
-    padding: 15px;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    margin-bottom: 15px;
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.progress-track {
-    height: 9px;
-    background: #e4eee8;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--green);
-    width: 0%;
-    transition: width 0.3s;
-}
-
-.exercise-card {
-    background: white;
-    border-radius: 25px;
-    padding: 18px;
-    box-shadow: var(--shadow);
-    text-align: center;
-}
-
-.exercise-number {
-    display: inline-flex;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: var(--green);
-    color: white;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.exercise-card h2 {
-    color: var(--green);
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
-.exercise-description {
-    color: var(--gray);
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-/* Görsel */
-.exercise-image {
-    width: 100%;
-    max-height: 390px;
-    object-fit: contain;
-    border-radius: 15px;
-    background: #f1f7f3;
-    margin-bottom: 15px;
-}
-
-/* Sayaç */
-
-.counter-info {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-.counter-pill {
-    background: var(--light-green);
-    color: var(--green);
-    padding: 8px 14px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.timer {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: var(--light-green);
-    border: 8px solid var(--soft-green);
-    margin: 15px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.timer-number {
-    color: var(--green);
-    font-size: 58px;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.timer-text {
-    color: var(--gray);
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.status {
-    min-height: 25px;
-    color: var(--green);
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.control-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.start-button {
-    padding: 16px;
-    border-radius: 13px;
-    background: var(--green);
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.pause-button {
-    padding: 16px;
-    border-radius: 13px;
-    background: #edf1ee;
-    color: var(--text);
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.pause-button.stop {
-    background: #fdebea;
-    color: var(--red);
-}
-
-.back-button {
-    margin-top: 10px;
-    width: 100%;
-    background: transparent;
-    color: var(--gray);
-    padding: 10px;
-}
-
-/* -------------------------
-   TAMAMLANDI
-------------------------- */
-
-.completed-card {
-    background: white;
-    border-radius: 28px;
-    padding: 40px 25px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.success-icon {
-    width: 85px;
-    height: 85px;
-    background: var(--light-green);
-    color: var(--green);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    margin: 0 auto 20px;
-}
-
-.completed-card h1 {
-    color: var(--green);
-    margin-bottom: 12px;
-}
-
-.completed-card p {
-    color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-/* Mobil */
-
-@media (max-width: 480px) {
-
-    .screen {
-        padding: 12px;
-    }
-
-    .welcome-card {
-        padding: 35px 20px;
-    }
-
-    .welcome-card h1 {
-        font-size: 28px;
-    }
-
-    .exercise-card {
-        padding: 13px;
-    }
-
-    .exercise-card h2 {
-        font-size: 19px;
-    }
-
-    .exercise-image {
-        max-height: 300px;
-    }
-
-    .timer {
-        width: 135px;
-        height: 135px;
-    }
-
-    .timer-number {
-        font-size: 52px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f7a4d">
+
+    <title>Betül'ün Egzersiz Programı</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green: #1f7a4d;
+            --dark-green: #155b39;
+            --light-green: #edf9f2;
+            --soft-green: #d8f1e2;
+            --text: #25352c;
+            --gray: #718078;
+            --red: #d9534f;
+            --white: #ffffff;
+            --shadow: 0 12px 35px rgba(31, 122, 77, 0.13);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eefaf3, #dff3e7);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .screen.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 620px;
+            margin: auto;
+        }
+
+        /* -------------------------
+           KARŞILAMA
+        ------------------------- */
+
+        .welcome-card {
+            background: white;
+            border-radius: 28px;
+            padding: 50px 28px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-card h1 {
+            color: var(--green);
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+
+        .welcome-card p {
+            color: var(--text);
+            font-size: 21px;
+            line-height: 1.55;
+            margin-bottom: 32px;
+        }
+
+        .primary-button {
+            width: 100%;
+            padding: 17px;
+            border-radius: 15px;
+            background: var(--green);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .primary-button:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* -------------------------
+           BİLGİ
+        ------------------------- */
+
+        .info-card {
+            background: white;
+            border-radius: 26px;
+            padding: 30px 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h2 {
+            color: var(--green);
+            margin-bottom: 22px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .info-list li {
+            background: var(--light-green);
+            margin-bottom: 10px;
+            padding: 14px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .warning {
+            background: #fff8e7;
+            border-left: 5px solid #e2ad32;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* -------------------------
+           EGZERSİZ
+        ------------------------- */
+
+        .exercise-screen {
+            align-items: flex-start !important;
+            padding-top: 15px;
+        }
+
+        .exercise-container {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .brand {
+            color: var(--green);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .date {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .progress-box {
+            background: white;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .progress-track {
+            height: 9px;
+            background: #e4eee8;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--green);
+            transition: width .3s;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 26px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .exercise-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+
+        .exercise-card h2 {
+            color: var(--green);
+            font-size: 22px;
+            margin-bottom: 7px;
+        }
+
+        .exercise-description {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 330px;
+            object-fit: contain;
+            border-radius: 15px;
+            background: #f2f8f4;
+            margin-bottom: 15px;
+        }
+
+        .counter-info {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .counter-pill {
+            background: var(--light-green);
+            color: var(--green);
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .timer {
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            background: var(--light-green);
+            border: 8px solid var(--soft-green);
+            margin: 17px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .timer-number {
+            color: var(--green);
+            font-size: 60px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .timer-text {
+            color: var(--gray);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .status {
+            min-height: 25px;
+            color: var(--green);
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .control-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .start-button,
+        .pause-button {
+            padding: 16px;
+            border-radius: 13px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .start-button {
+            background: var(--green);
+            color: white;
+        }
+
+        .pause-button {
+            background: #edf1ee;
+            color: var(--text);
+        }
+
+        .pause-button:hover {
+            background: #e2e8e4;
+        }
+
+        .exit-button {
+            width: 100%;
+            margin-top: 10px;
+            background: transparent;
+            color: var(--gray);
+            padding: 10px;
+        }
+
+        /* -------------------------
+           TAMAMLANDI
+        ------------------------- */
+
+        .completed-card {
+            background: white;
+            border-radius: 28px;
+            padding: 45px 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .completed-card h1 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .completed-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* -------------------------
+           KUTLAMA
+        ------------------------- */
+
+        #celebration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 18px;
+            border-radius: 3px;
+            animation: fall 1.8s ease-out forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform:
+                    translate(0, 0)
+                    rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translate(var(--x), 100vh)
+                    rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .firework {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(.2);
+                opacity: 1;
+                box-shadow:
+                    0 0 0 0 currentColor;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0;
+                box-shadow:
+                    0 -90px 0 2px currentColor,
+                    65px -65px 0 2px currentColor,
+                    90px 0 0 2px currentColor,
+                    65px 65px 0 2px currentColor,
+                    0 90px 0 2px currentColor,
+                    -65px 65px 0 2px currentColor,
+                    -90px 0 0 2px currentColor,
+                    -65px -65px 0 2px currentColor;
+            }
+        }
+
+        /* -------------------------
+           MOBİL
+        ------------------------- */
+
+        @media (max-width: 480px) {
+
+            .screen {
+                padding: 12px;
+            }
+
+            .welcome-card {
+                padding: 40px 20px;
+            }
+
+            .welcome-card h1 {
+                font-size: 28px;
+            }
+
+            .welcome-card p {
+                font-size: 19px;
+            }
+
+            .exercise-card {
+                padding: 13px;
+            }
+
+            .exercise-image {
+                height: 270px;
+            }
+
+            .timer {
+                width: 135px;
+                height: 135px;
+            }
+
+            .timer-number {
+                font-size: 52px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =====================
-     HOŞ GELDİN
-===================== -->
+<!-- =========================
+     KARŞILAMA
+========================= -->
 
 <section id="welcomeScreen" class="screen active">
 
@@ -437,19 +473,16 @@ button {
 
         <div class="welcome-card">
 
-            <div class="logo">🌿</div>
-
-            <h1>SKOLYOZ</h1>
-
-            <h2>Hoş Geldin 👋</h2>
+            <h1>Merhaba Betül, hoş geldin!</h1>
 
             <p>
-                Bugünkü egzersiz programına hazır mısın?
-                Hareketleri birlikte, adım adım tamamlayacağız.
+                Egzersize başlayalım mı?
             </p>
 
-            <button class="primary-button" onclick="showInfo()">
-                BAŞLAYALIM
+            <button
+                class="primary-button"
+                onclick="showInfo()">
+                Başlayalım
             </button>
 
         </div>
@@ -459,9 +492,9 @@ button {
 </section>
 
 
-<!-- =====================
+<!-- =========================
      BİLGİ
-===================== -->
+========================= -->
 
 <section id="infoScreen" class="screen">
 
@@ -469,41 +502,44 @@ button {
 
         <div class="info-card">
 
-            <h2>🌿 Egzersiz Programın</h2>
+            <h2>Egzersiz Programı</h2>
 
             <ul class="info-list">
 
                 <li>
-                    🧘 <strong>11 farklı hareket</strong> yapacaksın.
+                    11 farklı hareket yapacaksın.
                 </li>
 
                 <li>
-                    🔁 Her hareket <strong>10 tekrar</strong> yapılacak.
+                    Her hareket 10 tekrar yapılacak.
                 </li>
 
                 <li>
-                    ⏱️ Her tekrar <strong>5 saniye</strong> sürecek.
+                    Her tekrar 5 saniye sürecek.
                 </li>
 
                 <li>
-                    🔄 Program <strong>2 set</strong> olarak uygulanacak.
+                    Program 2 set olarak uygulanacak.
                 </li>
 
                 <li>
-                    🔊 Sayaç sırasında sesli uyarılarla sana eşlik edeceğiz.
+                    Sayaç sana egzersiz boyunca eşlik edecek.
                 </li>
 
             </ul>
 
             <div class="warning">
-                ⚠️ Bu site egzersiz programının takibini kolaylaştırmak
-                amacıyla hazırlanmıştır. Hareketleri sana önerilen
-                şekilde uygula. Ağrı veya rahatsızlık hissedersen
-                egzersizi durdur ve sağlık profesyoneline danış.
+                Bu uygulama yalnızca verilen egzersiz programını
+                takip etmeyi kolaylaştırmak amacıyla hazırlanmıştır.
+                Hareketleri doktorunun veya fizyoterapistinin
+                önerdiği şekilde uygula. Ağrı veya rahatsızlık
+                hissedersen egzersizi durdur.
             </div>
 
-            <button class="primary-button" onclick="startProgram()">
-                EGZERSİZE BAŞLA
+            <button
+                class="primary-button"
+                onclick="startProgram()">
+                Egzersize Başla
             </button>
 
         </div>
@@ -513,90 +549,137 @@ button {
 </section>
 
 
-<!-- =====================
-     EGZERSİZ EKRANI
-===================== -->
+<!-- =========================
+     EGZERSİZ
+========================= -->
 
-<section id="exerciseScreen" class="screen exercise-screen">
+<section id="exerciseScreen"
+         class="screen exercise-screen">
 
     <div class="exercise-container">
 
         <div class="top-bar">
 
             <div class="brand">
-                🌿 Skolyoz Egzersizleri
+                Betül'ün Egzersizi
             </div>
 
-            <div class="today" id="todayText"></div>
+            <div
+                class="date"
+                id="dateText">
+            </div>
 
         </div>
+
+
+        <!-- İLERLEME -->
 
         <div class="progress-box">
 
             <div class="progress-info">
-                <span id="movementProgress">Hareket 1 / 11</span>
-                <span id="totalProgress">0%</span>
+
+                <span id="movementProgress">
+                    Hareket 1 / 11
+                </span>
+
+                <span id="totalProgress">
+                    0%
+                </span>
+
             </div>
 
             <div class="progress-track">
-                <div id="progressFill" class="progress-fill"></div>
+
+                <div
+                    id="progressFill"
+                    class="progress-fill">
+                </div>
+
             </div>
 
         </div>
 
+
+        <!-- HAREKET -->
+
         <div class="exercise-card">
 
-            <div class="exercise-number" id="exerciseNumber">
+            <div
+                id="exerciseNumber"
+                class="exercise-number">
                 1
             </div>
 
             <h2 id="exerciseName">
-                Hareket
+                Hareket 1
             </h2>
 
-            <p class="exercise-description" id="exerciseDescription">
-                Açıklama
+            <p
+                id="exerciseDescription"
+                class="exercise-description">
+                Hareket açıklaması
             </p>
 
+
             <!--
-              GitHub'a yükleyeceğin görsel:
-              hareketler.jpg
+                SEN GÖRSELLERİ ŞU İSİMLERLE KOYACAKSIN:
+
+                hareket-1.jpg
+                hareket-2.jpg
+                hareket-3.jpg
+                ...
+                hareket-11.jpg
             -->
 
             <img
                 id="exerciseImage"
                 class="exercise-image"
-                src="hareketler.jpg"
-                alt="Skolyoz egzersizleri"
+                src="hareket-1.jpg"
+                alt="Egzersiz görseli"
+                onerror="this.style.display='none';"
             >
+
 
             <div class="counter-info">
 
                 <div class="counter-pill">
-                    SET <span id="setNumber">1</span> / 2
+                    Set
+                    <span id="setNumber">1</span>
+                    / 2
                 </div>
 
                 <div class="counter-pill">
-                    TEKRAR <span id="repNumber">1</span> / 10
+                    Tekrar
+                    <span id="repNumber">1</span>
+                    / 10
                 </div>
 
             </div>
 
+
+            <!-- SAYAÇ -->
+
             <div class="timer">
 
-                <div id="timerNumber" class="timer-number">
+                <div
+                    id="timerNumber"
+                    class="timer-number">
                     5
                 </div>
 
                 <div class="timer-text">
-                    SANİYE
+                    saniye
                 </div>
 
             </div>
 
-            <div id="status" class="status">
+
+            <div
+                id="status"
+                class="status">
                 Hazırsan başlayabiliriz.
             </div>
+
 
             <div class="control-buttons">
 
@@ -604,19 +687,22 @@ button {
                     id="startButton"
                     class="start-button"
                     onclick="startTimer()">
-                    ▶ BAŞLA
+                    Başla
                 </button>
 
                 <button
                     id="pauseButton"
                     class="pause-button"
                     onclick="pauseTimer()">
-                    Ⅱ DURDUR
+                    Durdur
                 </button>
 
             </div>
 
-            <button class="back-button" onclick="stopAndSave()">
+
+            <button
+                class="exit-button"
+                onclick="exitProgram()">
                 Programdan çık
             </button>
 
@@ -627,9 +713,9 @@ button {
 </section>
 
 
-<!-- =====================
+<!-- =========================
      TAMAMLANDI
-===================== -->
+========================= -->
 
 <section id="completedScreen" class="screen">
 
@@ -637,19 +723,17 @@ button {
 
         <div class="completed-card">
 
-            <div class="success-icon">
-                ✓
-            </div>
-
-            <h1>Tebrikler! 🎉</h1>
+            <h1>Tebrikler Betül!</h1>
 
             <p>
                 Bugünkü egzersiz programını tamamladın.
-                Kendin için güzel bir şey yaptın. 🌿
+                Harika iş çıkardın!
             </p>
 
-            <button class="primary-button" onclick="newDay()">
-                TEKRAR BAŞA DÖN
+            <button
+                class="primary-button"
+                onclick="backToStart()">
+                Başa Dön
             </button>
 
         </div>
@@ -659,84 +743,89 @@ button {
 </section>
 
 
+<!-- KUTLAMA ALANI -->
+
+<div id="celebration"></div>
+
+
 <script>
 
-/* ==================================
+/* ========================================
    PROGRAM AYARLARI
-================================== */
+======================================== */
 
 const SETS = 2;
 const REPS = 10;
 const SECONDS = 5;
 
 
-/* ==================================
+/* ========================================
    HAREKETLER
-================================== */
+======================================== */
 
 const exercises = [
 
     {
         name: "Fizik Tedavi Ünitesi Skolyoz Egzersizleri Formu",
-        description: "Hareketi fizyoterapistinin gösterdiği şekilde kontrollü olarak uygulayın."
+        description: "Hareketi verilen programa uygun şekilde kontrollü olarak uygula."
     },
 
     {
         name: "Kol - Bacak Ekstansiyonu",
-        description: "Karşı kol ve bacağı kontrollü şekilde uzatın ve başlangıç pozisyonuna dönün."
+        description: "Hareketi kontrollü şekilde uygula."
     },
 
     {
         name: "Orta Sırt Rotasyon ve Germe",
-        description: "Göğsünüzü kontrollü şekilde açarak sırt bölgesini nazikçe gerin."
+        description: "Sırt bölgesini kontrollü şekilde hareket ettir."
     },
 
     {
         name: "Torakolomber Yana Eğilme",
-        description: "Gövdenizi kontrollü şekilde yana doğru eğin ve başlangıç pozisyonuna dönün."
+        description: "Gövdeni kontrollü şekilde yana doğru hareket ettir."
     },
 
     {
         name: "Üst Trapez Esnetme",
-        description: "Başınızı nazikçe yana eğerek boyun ve omuz bölgesini gerin."
+        description: "Boyun ve omuz bölgesini nazikçe esnet."
     },
 
     {
         name: "Levator Skapula Germe",
-        description: "Boyun ve kürek kemiği çevresini kontrollü şekilde esnetin."
+        description: "Hareketi kontrollü ve yavaş şekilde uygula."
     },
 
     {
         name: "Hamstring Germe",
-        description: "Bacağın arka bölümünde hafif bir gerilme hissedene kadar kontrollü şekilde gerin."
+        description: "Bacağın arka bölümünü kontrollü şekilde ger."
     },
 
     {
         name: "Skapular Retraksiyon",
-        description: "Kürek kemiklerinizi kontrollü şekilde birbirine yaklaştırın."
+        description: "Kürek kemiklerini kontrollü şekilde geriye çek."
     },
 
     {
-        name: "Servikal / Torak Ekstansiyon - Rotasyon",
-        description: "Boyun ve gövdeyi kontrollü şekilde hareket ettirin."
+        name: "Servikal / Torak Ekstansiyon ve Rotasyon",
+        description: "Boyun ve gövde hareketini kontrollü şekilde uygula."
     },
 
     {
         name: "Torakolomber Yana Eğilme",
-        description: "Yana doğru kontrollü şekilde eğilin ve hareketi diğer taraf için tekrarlayın."
+        description: "Gövdeyi kontrollü şekilde yana doğru hareket ettir."
     },
 
     {
         name: "Lomber Rotasyon",
-        description: "Bel bölgesini kontrollü ve ağrısız hareket açıklığında döndürün."
+        description: "Bel bölgesini kontrollü ve ağrısız şekilde döndür."
     }
 
 ];
 
 
-/* ==================================
+/* ========================================
    DURUM
-================================== */
+======================================== */
 
 let currentExercise = 0;
 let currentSet = 1;
@@ -748,41 +837,47 @@ let timer = null;
 let running = false;
 
 
-/* ==================================
+/* ========================================
    TARİH
-================================== */
+======================================== */
 
 function getToday() {
 
     const now = new Date();
 
-    return now.getFullYear() + "-" +
-        String(now.getMonth() + 1).padStart(2, "0") + "-" +
-        String(now.getDate()).padStart(2, "0");
+    return (
+        now.getFullYear() +
+        "-" +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(now.getDate()).padStart(2, "0")
+    );
 
 }
 
 
-/* ==================================
+/* ========================================
    EKRAN DEĞİŞTİR
-================================== */
+======================================== */
 
 function showScreen(id) {
 
-    document.querySelectorAll(".screen")
+    document
+        .querySelectorAll(".screen")
         .forEach(screen => {
             screen.classList.remove("active");
         });
 
-    document.getElementById(id)
+    document
+        .getElementById(id)
         .classList.add("active");
 
 }
 
 
-/* ==================================
-   HOŞ GELDİN
-================================== */
+/* ========================================
+   BİLGİ EKRANI
+======================================== */
 
 function showInfo() {
 
@@ -791,9 +886,9 @@ function showInfo() {
 }
 
 
-/* ==================================
-   PROGRAMI BAŞLAT
-================================== */
+/* ========================================
+   PROGRAM BAŞLANGICI
+======================================== */
 
 function startProgram() {
 
@@ -806,13 +901,13 @@ function startProgram() {
 }
 
 
-/* ==================================
-   KAYIT
-================================== */
+/* ========================================
+   İLERLEME KAYDET
+======================================== */
 
 function saveProgress() {
 
-    const data = {
+    const progress = {
 
         date: getToday(),
 
@@ -828,15 +923,15 @@ function saveProgress() {
 
     localStorage.setItem(
         "skolyozProgress",
-        JSON.stringify(data)
+        JSON.stringify(progress)
     );
 
 }
 
 
-/* ==================================
-   KAYDI YÜKLE
-================================== */
+/* ========================================
+   İLERLEME YÜKLE
+======================================== */
 
 function loadProgress() {
 
@@ -854,7 +949,10 @@ function loadProgress() {
 
         const data = JSON.parse(saved);
 
-        /* Eski günse sıfırla */
+        /*
+            Eğer kayıt başka güne aitse
+            sıfırla.
+        */
 
         if (data.date !== getToday()) {
 
@@ -863,10 +961,17 @@ function loadProgress() {
 
         }
 
-        currentExercise = data.exercise || 0;
-        currentSet = data.set || 1;
-        currentRep = data.rep || 1;
-        timeLeft = data.timeLeft || SECONDS;
+        currentExercise =
+            Number(data.exercise) || 0;
+
+        currentSet =
+            Number(data.set) || 1;
+
+        currentRep =
+            Number(data.rep) || 1;
+
+        timeLeft =
+            Number(data.timeLeft) || SECONDS;
 
     }
 
@@ -879,9 +984,9 @@ function loadProgress() {
 }
 
 
-/* ==================================
+/* ========================================
    SIFIRLA
-================================== */
+======================================== */
 
 function resetProgress() {
 
@@ -897,36 +1002,73 @@ function resetProgress() {
 }
 
 
-/* ==================================
-   HAREKETİ GÜNCELLE
-================================== */
+/* ========================================
+   HAREKET EKRANINI GÜNCELLE
+======================================== */
 
 function updateExercise() {
 
     const exercise =
         exercises[currentExercise];
 
-    document.getElementById("exerciseNumber")
-        .textContent = currentExercise + 1;
+    document.getElementById(
+        "exerciseNumber"
+    ).textContent =
+        currentExercise + 1;
 
-    document.getElementById("exerciseName")
-        .textContent = exercise.name;
 
-    document.getElementById("exerciseDescription")
-        .textContent = exercise.description;
+    document.getElementById(
+        "exerciseName"
+    ).textContent =
+        exercise.name;
 
-    document.getElementById("setNumber")
-        .textContent = currentSet;
 
-    document.getElementById("repNumber")
-        .textContent = currentRep;
+    document.getElementById(
+        "exerciseDescription"
+    ).textContent =
+        exercise.description;
 
-    document.getElementById("timerNumber")
-        .textContent = timeLeft;
 
-    document.getElementById("movementProgress")
-        .textContent =
+    document.getElementById(
+        "setNumber"
+    ).textContent =
+        currentSet;
+
+
+    document.getElementById(
+        "repNumber"
+    ).textContent =
+        currentRep;
+
+
+    document.getElementById(
+        "timerNumber"
+    ).textContent =
+        timeLeft;
+
+
+    document.getElementById(
+        "movementProgress"
+    ).textContent =
         `Hareket ${currentExercise + 1} / ${exercises.length}`;
+
+
+    /*
+        Hareket görselini otomatik değiştir.
+    */
+
+    const image =
+        document.getElementById("exerciseImage");
+
+    image.src =
+        `hareket-${currentExercise + 1}.jpg`;
+
+    image.style.display = "block";
+
+
+    /*
+        Toplam ilerleme
+    */
 
     const totalSteps =
         exercises.length * SETS * REPS;
@@ -937,25 +1079,37 @@ function updateExercise() {
         currentRep - 1;
 
     const percentage =
-        Math.round((currentStep / totalSteps) * 100);
+        Math.round(
+            (currentStep / totalSteps) * 100
+        );
 
-    document.getElementById("totalProgress")
-        .textContent = percentage + "%";
+    document.getElementById(
+        "totalProgress"
+    ).textContent =
+        percentage + "%";
 
-    document.getElementById("progressFill")
-        .style.width = percentage + "%";
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        percentage + "%";
 
-    document.getElementById("todayText")
-        .textContent = getToday();
+
+    document.getElementById(
+        "dateText"
+    ).textContent =
+        getToday();
 
 }
 
 
-/* ==================================
+/* ========================================
    SES
-================================== */
+======================================== */
 
-function beep(frequency = 700, duration = 120) {
+function beep(
+    frequency = 700,
+    duration = 120
+) {
 
     try {
 
@@ -972,6 +1126,7 @@ function beep(frequency = 700, duration = 120) {
         const gain =
             context.createGain();
 
+
         oscillator.frequency.value =
             frequency;
 
@@ -979,33 +1134,38 @@ function beep(frequency = 700, duration = 120) {
 
         oscillator.connect(gain);
 
-        gain.connect(context.destination);
+        gain.connect(
+            context.destination
+        );
+
 
         gain.gain.setValueAtTime(
             0.15,
             context.currentTime
         );
 
+
         oscillator.start();
 
         oscillator.stop(
-            context.currentTime + duration / 1000
+            context.currentTime +
+            duration / 1000
         );
 
     }
 
     catch (error) {
 
-        console.log("Ses başlatılamadı.");
+        console.log("Ses kullanılamadı.");
 
     }
 
 }
 
 
-/* ==================================
-   ZAMANLAYICI
-================================== */
+/* ========================================
+   SAYAÇ BAŞLAT
+======================================== */
 
 function startTimer() {
 
@@ -1013,28 +1173,45 @@ function startTimer() {
 
     running = true;
 
-    document.getElementById("status")
-        .textContent = "Devam ediyor...";
+    document.getElementById(
+        "status"
+    ).textContent =
+        "Devam ediyor...";
 
-    document.getElementById("startButton")
-        .textContent = "▶ DEVAM EDİYOR";
+
+    document.getElementById(
+        "startButton"
+    ).textContent =
+        "Başla";
+
 
     timer = setInterval(() => {
 
         timeLeft--;
 
-        document.getElementById("timerNumber")
-            .textContent = timeLeft;
+        document.getElementById(
+            "timerNumber"
+        ).textContent =
+            timeLeft;
 
-        /* Son saniyeler */
 
-        if (timeLeft <= 3 && timeLeft > 0) {
+        /*
+            Son 3 saniyede küçük bip
+        */
+
+        if (
+            timeLeft <= 3 &&
+            timeLeft > 0
+        ) {
 
             beep(500, 80);
 
         }
 
-        /* Süre bitti */
+
+        /*
+            Süre tamamlandı
+        */
 
         if (timeLeft <= 0) {
 
@@ -1042,7 +1219,7 @@ function startTimer() {
 
             running = false;
 
-            beep(900, 250);
+            beep(950, 250);
 
             nextRep();
 
@@ -1053,9 +1230,9 @@ function startTimer() {
 }
 
 
-/* ==================================
+/* ========================================
    DURDUR
-================================== */
+======================================== */
 
 function pauseTimer() {
 
@@ -1067,23 +1244,26 @@ function pauseTimer() {
 
     saveProgress();
 
-    document.getElementById("status")
-        .textContent =
+    document.getElementById(
+        "status"
+    ).textContent =
         "Durduruldu. Hazır olduğunda devam edebilirsin.";
-
-    document.getElementById("startButton")
-        .textContent = "▶ DEVAM ET";
 
 }
 
 
-/* ==================================
+/* ========================================
    SONRAKİ TEKRAR
-================================== */
+======================================== */
 
 function nextRep() {
 
     timeLeft = SECONDS;
+
+
+    /*
+        Aynı hareketin sonraki tekrarı
+    */
 
     if (currentRep < REPS) {
 
@@ -1093,11 +1273,10 @@ function nextRep() {
 
         updateExercise();
 
-        document.getElementById("status")
-            .textContent =
+        document.getElementById(
+            "status"
+        ).textContent =
             `Tekrar ${currentRep} hazır.`;
-
-        /* Otomatik devam */
 
         setTimeout(() => {
 
@@ -1107,16 +1286,23 @@ function nextRep() {
 
             }
 
-        }, 700);
+        }, 600);
 
         return;
 
     }
 
 
-    /* ==========================
-       SET BİTTİ
-    ========================== */
+    /*
+        HAREKET TAMAMLANDI
+    */
+
+    celebrate();
+
+
+    /*
+        Set devam ediyor
+    */
 
     if (currentSet < SETS) {
 
@@ -1128,11 +1314,11 @@ function nextRep() {
 
         updateExercise();
 
-        document.getElementById("status")
-            .textContent =
+        document.getElementById(
+            "status"
+        ).textContent =
             `Set ${currentSet} başladı.`;
 
-        beep(1000, 350);
 
         setTimeout(() => {
 
@@ -1142,18 +1328,22 @@ function nextRep() {
 
             }
 
-        }, 1200);
+        }, 1600);
 
         return;
 
     }
 
 
-    /* ==========================
-       HAREKET BİTTİ
-    ========================== */
+    /*
+        Hareketin iki seti de bitti.
+        Sonraki harekete geç.
+    */
 
-    if (currentExercise < exercises.length - 1) {
+    if (
+        currentExercise <
+        exercises.length - 1
+    ) {
 
         currentExercise++;
 
@@ -1165,11 +1355,11 @@ function nextRep() {
 
         updateExercise();
 
-        document.getElementById("status")
-            .textContent =
-            "Sonraki harekete geçiyoruz.";
+        document.getElementById(
+            "status"
+        ).textContent =
+            "Sıradaki harekete geçiyoruz.";
 
-        beep(1100, 350);
 
         setTimeout(() => {
 
@@ -1179,25 +1369,155 @@ function nextRep() {
 
             }
 
-        }, 1200);
+        }, 1600);
 
         return;
 
     }
 
 
-    /* ==========================
-       TÜM PROGRAM BİTTİ
-    ========================== */
+    /*
+        TÜM PROGRAM BİTTİ
+    */
 
     completeProgram();
 
 }
 
 
-/* ==================================
-   TAMAMLANDI
-================================== */
+/* ========================================
+   KUTLAMA
+======================================== */
+
+function celebrate() {
+
+    const container =
+        document.getElementById(
+            "celebration"
+        );
+
+
+    /*
+        Konfetiler
+    */
+
+    const colors = [
+        "#1f7a4d",
+        "#44b978",
+        "#f4c542",
+        "#ff6b6b",
+        "#5b8def",
+        "#c76bff"
+    ];
+
+
+    for (let i = 0; i < 90; i++) {
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+        particle.className =
+            "particle";
+
+
+        particle.style.left =
+            Math.random() * 100 + "%";
+
+
+        particle.style.top =
+            Math.random() * 20 + "%";
+
+
+        particle.style.background =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        particle.style.setProperty(
+            "--x",
+            (Math.random() * 300 - 150) + "px"
+        );
+
+
+        particle.style.animationDelay =
+            Math.random() * .3 + "s";
+
+
+        container.appendChild(
+            particle
+        );
+
+
+        setTimeout(() => {
+
+            particle.remove();
+
+        }, 2200);
+
+    }
+
+
+    /*
+        Havai fişekler
+    */
+
+    for (let i = 0; i < 4; i++) {
+
+        setTimeout(() => {
+
+            const firework =
+                document.createElement(
+                    "div"
+                );
+
+            firework.className =
+                "firework";
+
+
+            firework.style.left =
+                (20 + Math.random() * 60) + "%";
+
+
+            firework.style.top =
+                (15 + Math.random() * 40) + "%";
+
+
+            firework.style.color =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ];
+
+
+            container.appendChild(
+                firework
+            );
+
+
+            setTimeout(() => {
+
+                firework.remove();
+
+            }, 1200);
+
+        }, i * 250);
+
+    }
+
+}
+
+
+/* ========================================
+   TÜM PROGRAM TAMAMLANDI
+======================================== */
 
 function completeProgram() {
 
@@ -1205,81 +1525,131 @@ function completeProgram() {
 
     running = false;
 
-    localStorage.setItem(
-        "skolyozCompleted",
-        getToday()
-    );
 
     localStorage.removeItem(
         "skolyozProgress"
     );
 
-    /* Uzun başarı sesi */
 
-    beep(1200, 500);
+    localStorage.setItem(
+        "skolyozCompleted",
+        getToday()
+    );
+
+
+    /*
+        Büyük kutlama
+    */
+
+    celebrate();
+
+    setTimeout(
+        celebrate,
+        500
+    );
+
+    setTimeout(
+        celebrate,
+        1000
+    );
+
+
+    /*
+        Başarı sesleri
+    */
+
+    beep(1000, 300);
 
     setTimeout(() => {
-        beep(1500, 500);
-    }, 550);
+        beep(1300, 300);
+    }, 350);
 
-    showScreen("completedScreen");
+    setTimeout(() => {
+        beep(1600, 500);
+    }, 700);
+
+
+    setTimeout(() => {
+
+        showScreen(
+            "completedScreen"
+        );
+
+    }, 1400);
 
 }
 
 
-/* ==================================
-   PROGRAMDAN ÇIKIŞ
-================================== */
+/* ========================================
+   PROGRAMDAN ÇIK
+======================================== */
 
-function stopAndSave() {
+function exitProgram() {
 
     if (running) {
 
         clearInterval(timer);
+
         running = false;
 
     }
 
     saveProgress();
 
-    showScreen("welcomeScreen");
+    showScreen(
+        "welcomeScreen"
+    );
 
 }
 
 
-/* ==================================
-   YENİ GÜN
-================================== */
+/* ========================================
+   BAŞA DÖN
+======================================== */
 
-function newDay() {
+function backToStart() {
 
     resetProgress();
 
-    showScreen("welcomeScreen");
+    showScreen(
+        "welcomeScreen"
+    );
 
 }
 
 
-/* ==================================
+/* ========================================
    SAYFA AÇILDIĞINDA
-================================== */
+======================================== */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+    "load",
+    () => {
 
-    /*
-      Eski günün kaydı varsa otomatik sil.
-    */
+        const saved =
+            localStorage.getItem(
+                "skolyozProgress"
+            );
 
-    const saved =
-        localStorage.getItem("skolyozProgress");
 
-    if (saved) {
+        if (!saved) return;
+
 
         try {
 
-            const data = JSON.parse(saved);
+            const data =
+                JSON.parse(saved);
 
-            if (data.date !== getToday()) {
+
+            /*
+                Önceki günün kaydı
+                varsa sil.
+            */
+
+            if (
+                data.date !==
+                getToday()
+            ) {
 
                 resetProgress();
 
@@ -1294,8 +1664,7 @@ window.addEventListener("load", () => {
         }
 
     }
-
-});
+);
 
 </script>
 
